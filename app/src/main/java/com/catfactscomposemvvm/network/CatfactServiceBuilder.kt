@@ -3,7 +3,7 @@ package com.catfactscomposemvvm.network
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object RetrofitServiceBuilder {
+object CatfactServiceBuilder {
 
     val BASE_URL = "https://catfact.ninja"
 
@@ -14,9 +14,9 @@ object RetrofitServiceBuilder {
             .build()
     }
 
-    fun getRetrofitService(): RetrofitService
+    fun getCatfactService(): CatfactService
     {
         val retrofit = getRetrofit()
-        return retrofit.create(RetrofitService::class.java)
+        return retrofit.create(CatfactService::class.java)
     }
 }
