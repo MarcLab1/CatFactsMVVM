@@ -7,7 +7,7 @@ interface CatfactService {
     @GET("/fact")
     suspend fun getCatfact() : CatfactDto
 
-    @GET("facts")
-    suspend fun getCatfacts() : List<CatfactDto>
+    @GET("/facts")
+    suspend fun getCatfacts() : CatfactsDto
 
 }

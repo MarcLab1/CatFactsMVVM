@@ -6,4 +6,6 @@ interface CatfactRepository{
 
     suspend fun getCatfact() : Catfact
 
+    suspend fun getCatFacts(): List<Catfact>
+
 }

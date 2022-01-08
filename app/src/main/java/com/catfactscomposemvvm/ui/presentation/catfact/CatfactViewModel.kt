@@ -1,4 +1,4 @@
-package com.catfactscomposemvvm.ui.presentation
+package com.catfactscomposemvvm.ui.presentation.catfact
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -11,7 +11,8 @@ import javax.inject.Inject
 @HiltViewModel
 class CatfactViewModel
 @Inject constructor(
-    private val repository: CatfactRepository) : ViewModel(){
+    private val repository: CatfactRepository
+) : ViewModel() {
 
     var catfact = mutableStateOf("")
 
@@ -19,9 +20,8 @@ class CatfactViewModel
         populateCatfact()
     }
 
-    fun populateCatfact() : Unit
-    {
-        viewModelScope.launch{
+    fun populateCatfact(): Unit {
+        viewModelScope.launch {
             catfact.value = repository.getCatfact().fact
         }
     }

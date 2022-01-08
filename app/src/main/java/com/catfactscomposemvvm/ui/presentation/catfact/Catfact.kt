@@ -1,4 +1,4 @@
-package com.catfactscomposemvvm.ui.presentation
+package com.catfactscomposemvvm.ui.presentation.catfact
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
