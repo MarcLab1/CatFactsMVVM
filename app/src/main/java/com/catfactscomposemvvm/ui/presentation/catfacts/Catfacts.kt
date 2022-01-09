@@ -7,11 +7,15 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.catfactscomposemvvm.ui.presentation.hilty.HiltyViewModel
 
 @Composable
 fun Catfacts() {
-    var vm: CatfactsViewModel = viewModel()
+
+    //var vm: CatfactsViewModel = viewModel()
+    val vm = hiltViewModel<CatfactsViewModel>()
 
     LazyColumn()
     {
@@ -20,6 +24,8 @@ fun Catfacts() {
             Text(text = catfact, modifier = Modifier.padding(bottom = 10.dp))
         }
     }
+
+
 
 
 }

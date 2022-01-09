@@ -8,7 +8,7 @@ import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject
 
 
-class CatfactRepository_Impl(private val catfactService: CatfactService) : CatfactRepository {
+class CatfactRepository_Impl (private val catfactService: CatfactService) : CatfactRepository {
     override suspend fun getCatfact(): Catfact {
         return catfactService.getCatfact().toCatfact()
     }

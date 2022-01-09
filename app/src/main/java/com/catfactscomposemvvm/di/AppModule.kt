@@ -5,6 +5,9 @@ import com.catfactscomposemvvm.BaseApplication
 import com.catfactscomposemvvm.network.CatfactService
 import com.catfactscomposemvvm.repository.CatfactRepository
 import com.catfactscomposemvvm.repository.CatfactRepository_Impl
+import com.catfactscomposemvvm.ui.presentation.hilttesting.Item
+import com.catfactscomposemvvm.ui.presentation.hilty.Repo
+import com.catfactscomposemvvm.ui.presentation.hilty.Service
 import com.catfactscomposemvvm.ulits.Constants
 import dagger.Module
 import dagger.Provides
@@ -13,6 +16,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -25,10 +29,11 @@ object AppModule {
         return app as BaseApplication
     }
 
+    //We inject this into the VM
     @Singleton
     @Provides
-    fun provideCatfactRepository(): CatfactRepository {
-        return CatfactRepository_Impl(provideCatfactService())
+    fun provideCatfactRepository(catfactService: CatfactService): CatfactRepository {
+        return CatfactRepository_Impl(catfactService)
     }
 
     @Singleton
@@ -40,4 +45,43 @@ object AppModule {
             .build()
             .create(CatfactService::class.java)
     }
+
+    @Singleton
+    @Provides
+    @Named("item1")
+    fun provideItem1(): Item {
+        return Item()
+    }
+
+
+    @Singleton
+    @Provides
+    @Named("item2")
+    fun provideItem2(): Item {
+        return provideItem1()
+    }
+
+    @Singleton
+    @Provides
+    fun provideService() : Service
+    {
+        return Service("fake", 22)
+    }
+
+    @Singleton
+    @Provides
+    @Named("repo1")
+    fun provideRepo1(service: Service) : Repo
+    {
+        return Repo(service)
+    }
+
+    @Singleton
+    @Provides
+    @Named("repo2")
+    fun provideRepo2(service: Service) : Repo
+    {
+        return provideRepo1(provideService())
+    }
+
 }
