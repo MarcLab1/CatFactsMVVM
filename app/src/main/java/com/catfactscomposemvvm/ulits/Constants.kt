@@ -9,19 +9,29 @@ object Constants {
 
     val BottomNavItems = listOf(
         BottomNavItem(
-            label = "catfact",
+            label = "Cat Fact",
             icon = Icons.Filled.Home,
             route = "catfact"
         ),
         BottomNavItem(
-            label = "catfacts",
+            label = "Cat Facts",
             icon = Icons.Filled.Face,
             route = "catfacts"
         ),
         BottomNavItem(
-            label = "hilttest",
+            label = "Breeds",
+            icon = Icons.Filled.ThumbUp,
+            route = "breeds"
+        ),
+        BottomNavItem(
+            label = "Hilt Test1",
             icon = Icons.Filled.Star,
             route = "hilttest"
+        ),
+        BottomNavItem(
+            label = "Hilt Test2",
+            icon = Icons.Filled.Info,
+            route = "injectiontest"
         )
     )
 }

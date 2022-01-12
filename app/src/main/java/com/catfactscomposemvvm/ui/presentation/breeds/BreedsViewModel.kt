@@ -1,9 +1,10 @@
-package com.catfactscomposemvvm.ui.presentation.catfacts
+package com.catfactscomposemvvm.ui.presentation.breeds
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.catfactscomposemvvm.domain.Breed
 import com.catfactscomposemvvm.domain.Catfact
 import com.catfactscomposemvvm.repository.CatfactRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -12,12 +13,12 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class CatfactsViewModel
+class BreedsViewModel
 @Inject constructor(
     private val repository: CatfactRepository
 ) : ViewModel() {
 
-    var catfactList: MutableState<List<Catfact>> = mutableStateOf(ArrayList())
+    var breedList: MutableState<List<Breed>> = mutableStateOf(ArrayList())
     val loading = mutableStateOf(false)
     val page = mutableStateOf(1)
     var recipeListScrollPosition = 0
@@ -27,34 +28,35 @@ class CatfactsViewModel
     }
 
     fun populateCatfacts(): Unit {
-        viewModelScope.launch { catfactList.value = repository.getCatFacts(page.value).map { it } }
+        viewModelScope.launch { breedList.value = repository.getBreeds(page.value).map { it } }
     }
 
-    fun nextPage() {
+    fun nextPage(){
         viewModelScope.launch {
-
             loading.value = true
             incrementPage()
 
             if (page.value > 1) {
-                val result = repository.getCatFacts(page.value)
-                addMoreCatfacts(result)
+                val result = repository.getBreeds(page.value)
+                addMoreBreeds(result)
             }
             loading.value = false
         }
     }
 
-    private fun addMoreCatfacts(newList: List<Catfact>) {
-        val current = ArrayList(this.catfactList.value)
+    private fun addMoreBreeds(newList : List<Breed>){
+        val current = ArrayList(this.breedList.value)
         current.addAll(newList)
-        this.catfactList.value = current
+        this.breedList.value = current
     }
 
-    private fun incrementPage() {
+    private fun incrementPage(){
         page.value = page.value + 1
     }
 
-    fun onChangeRecipeScrollPosition(position: Int) {
+    fun onChangeRecipeScrollPosition(position: Int){
         recipeListScrollPosition = position
     }
+
+
 }

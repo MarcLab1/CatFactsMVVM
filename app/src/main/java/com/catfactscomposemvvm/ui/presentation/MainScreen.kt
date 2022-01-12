@@ -2,50 +2,55 @@ package com.catfactscomposemvvm.ui.presentation
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.Phone
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.catfactscomposemvvm.ui.presentation.breeds.Breeds
 import com.catfactscomposemvvm.ui.presentation.catfact.Catfact
 import com.catfactscomposemvvm.ui.presentation.catfacts.Catfacts
+import com.catfactscomposemvvm.ui.presentation.hilttesting.HiltInjectionTest
 import com.catfactscomposemvvm.ui.presentation.hilty.Hilty
 import com.catfactscomposemvvm.ulits.Constants
-import dagger.hilt.android.AndroidEntryPoint
-
 
 @Composable
-fun MyBottomNavigation() {
+fun MainScreen() {
     val navController = rememberNavController()
 
     Surface() {
         Scaffold(
             bottomBar = {
-                BottomNavigationBar(navController = navController)
+                MyBottomNavigationBar(navController = navController)
             }, content = {
                 NavHostStart(navController = navController)
+            },
+            topBar = {
+               MyTopAppBar()
             }
         )
     }
 }
 
+@Composable
+fun MyTopAppBar() {
+    TopAppBar() {
+        IconButton(onClick = { /*TODO*/ }) {
+
+        }
+        
+    }
+}
 
 @Composable
-fun BottomNavigationBar(navController: NavController) {
+fun MyBottomNavigationBar(navController: NavController) {
 
     BottomNavigation() {
 
@@ -78,16 +83,24 @@ fun BottomNavigationBar(navController: NavController) {
 fun NavHostStart(
     navController: NavHostController
 ) {
-    NavHost(navController, startDestination = Constants.BottomNavItems.get(0).route,
-        modifier = Modifier.padding(10.dp)) {
+    NavHost(
+        navController, startDestination = Constants.BottomNavItems.get(0).route,
+        modifier = Modifier.padding(10.dp)
+    ) {
         composable(route = Constants.BottomNavItems.get(0).route) {
-           Catfact()
+            Catfact()
         }
         composable(route = Constants.BottomNavItems.get(1).route) {
             Catfacts()
         }
         composable(route = Constants.BottomNavItems.get(2).route) {
+            Breeds()
+        }
+        composable(route = Constants.BottomNavItems.get(3).route) {
             Hilty()
+        }
+        composable(route = Constants.BottomNavItems.get(4).route) {
+            HiltInjectionTest()
         }
     }
 }

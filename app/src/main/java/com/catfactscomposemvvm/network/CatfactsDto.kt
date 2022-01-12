@@ -1,6 +1,7 @@
 package com.catfactscomposemvvm.network
 
 import com.catfactscomposemvvm.domain.Catfact
+import com.catfactscomposemvvm.domain.Link
 
 data class CatfactsDto(
     val current_page: Int,
@@ -26,9 +27,3 @@ fun CatfactsDto.toCatfacts() : List<Catfact>
 
     return list
 }
-
-data class Link(
-    val url: String?,
-    val label: String,
-    val active: Boolean
-)
