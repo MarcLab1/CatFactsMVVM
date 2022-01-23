@@ -25,7 +25,7 @@ fun Catfacts() {
         itemsIndexed(vm.catfactList.value)
         { index, catfact ->
 
-            vm.onChangeRecipeScrollPosition(index)
+            vm.onChangeScrollPosition(index)
             if((index + 1) >= (page * PAGE_SIZE) && !loading){
                 vm.nextPage()
             }
