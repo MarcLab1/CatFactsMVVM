@@ -20,7 +20,7 @@ class CatfactsViewModel
     var catfactList: MutableState<List<Catfact>> = mutableStateOf(ArrayList())
     val loading = mutableStateOf(false)
     val page = mutableStateOf(1)
-    var recipeListScrollPosition = 0
+    var scrollPosition = 0
 
     init {
         populateCatfacts()
@@ -54,7 +54,7 @@ class CatfactsViewModel
         page.value = page.value + 1
     }
 
-    fun onChangeRecipeScrollPosition(position: Int) {
-        recipeListScrollPosition = position
+    fun onChangeScrollPosition(position: Int) {
+        scrollPosition = position
     }
 }
