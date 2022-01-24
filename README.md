@@ -1,6 +1,6 @@
 # CatFactsMVVM
 
-A 
+An app that provides cat facts and demonstrates simple API interaction.
 
 ## Concepts 
 
