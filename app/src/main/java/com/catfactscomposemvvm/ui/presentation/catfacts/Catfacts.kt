@@ -20,17 +20,23 @@ fun Catfacts() {
     val page = vm.page.value
     val PAGE_SIZE = 10
 
-    LazyColumn()
+    //Text(vm.networkSearches.toString())
+
+    LazyColumn( modifier = Modifier.padding(bottom = 50.dp))
     {
+
         itemsIndexed(vm.catfactList.value)
         { index, catfact ->
 
             vm.onChangeScrollPosition(index)
-            if((index + 1) >= (page * PAGE_SIZE) && !loading){
+            if ((index + 1) >= (page * PAGE_SIZE) && !loading) {
                 vm.nextPage()
             }
 
-            Text(text = "${(index+1).toString()} -> ${catfact.fact.toString()}", modifier = Modifier.padding(bottom = 10.dp))
+            Text(
+                text = "${(index + 1)} -> ${catfact.fact}",
+                modifier = Modifier.padding(bottom = 10.dp)
+            )
         }
     }
 

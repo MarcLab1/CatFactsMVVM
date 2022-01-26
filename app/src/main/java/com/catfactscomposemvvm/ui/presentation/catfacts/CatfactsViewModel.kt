@@ -21,13 +21,17 @@ class CatfactsViewModel
     val loading = mutableStateOf(false)
     val page = mutableStateOf(1)
     var scrollPosition = 0
+    var networkSearches = 0
 
     init {
         populateCatfacts()
     }
 
     fun populateCatfacts(): Unit {
+        scrollPosition = 0
+        networkSearches = 0
         viewModelScope.launch { catfactList.value = repository.getCatFacts(page.value).map { it } }
+        networkSearches ++
     }
 
     fun nextPage() {
@@ -39,6 +43,7 @@ class CatfactsViewModel
             if (page.value > 1) {
                 val result = repository.getCatFacts(page.value)
                 addMoreCatfacts(result)
+                networkSearches ++
             }
             loading.value = false
         }
@@ -51,7 +56,7 @@ class CatfactsViewModel
     }
 
     private fun incrementPage() {
-        page.value = page.value + 1
+        page.value ++
     }
 
     fun onChangeScrollPosition(position: Int) {
