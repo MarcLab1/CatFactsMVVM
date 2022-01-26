@@ -20,7 +20,6 @@ class CatfactsViewModel
     var catfactList: MutableState<List<Catfact>> = mutableStateOf(ArrayList())
     val loading = mutableStateOf(false)
     val page = mutableStateOf(1)
-    var scrollPosition = 0
     var networkSearches = 0
 
     init {
@@ -28,7 +27,6 @@ class CatfactsViewModel
     }
 
     fun populateCatfacts(): Unit {
-        scrollPosition = 0
         networkSearches = 0
         viewModelScope.launch { catfactList.value = repository.getCatFacts(page.value).map { it } }
         networkSearches ++
@@ -57,9 +55,5 @@ class CatfactsViewModel
 
     private fun incrementPage() {
         page.value ++
-    }
-
-    fun onChangeScrollPosition(position: Int) {
-        scrollPosition = position
     }
 }
